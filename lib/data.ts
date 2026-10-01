@@ -4,6 +4,7 @@ export interface TicketCategory {
   price: number
   currency: string
   available: boolean
+  seatmapImage: string
 }
 
 export interface EventData {
@@ -20,26 +21,44 @@ export interface EventData {
   categories: TicketCategory[]
 }
 
-const sixNationsCategories: TicketCategory[] = [
-  { id: 'cat1', name: 'Category 1 - Premium', price: 375, currency: 'EUR', available: true },
-  { id: 'cat2', name: 'Category 2 - Prime', price: 295, currency: 'EUR', available: true },
-  { id: 'cat3', name: 'Category 3 - Standard', price: 195, currency: 'EUR', available: true },
-  { id: 'cat4', name: 'Category 4 - Upper Tier', price: 125, currency: 'EUR', available: true },
-]
-
 export const events: EventData[] = [
   {
     slug: 'ireland-vs-england-six-nations',
     title: 'Ireland vs England',
     subtitle: 'Six Nations 2027',
     competition: 'Six Nations',
-    date: 'Friday, 05 February 2027',
+    date: 'Fri 5th Feb',
     time: '20:10',
     dateISO: '2027-02-05T20:10:00+00:00',
     venue: 'Aviva Stadium',
     venueAddress: '62 Lansdowne Road, Dublin 4, Ireland',
     city: 'Dublin',
-    categories: sixNationsCategories,
+    categories: [
+      {
+        id: 'cat3',
+        name: 'Category 3',
+        price: 140.99,
+        currency: 'EUR',
+        available: false,
+        seatmapImage: '/images/irfu-seatmap-cat3.png',
+      },
+      {
+        id: 'cat2',
+        name: 'Category 2',
+        price: 69.99,
+        currency: 'EUR',
+        available: true,
+        seatmapImage: '/images/irfu-seatmap-cat2.png',
+      },
+      {
+        id: 'cat1',
+        name: 'Category 1',
+        price: 64.99,
+        currency: 'EUR',
+        available: true,
+        seatmapImage: '/images/irfu-seatmap-cat1.png',
+      },
+    ],
   },
 ]
 

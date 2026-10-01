@@ -2,74 +2,41 @@
 
 import Link from 'next/link'
 import { useCart } from './CartProvider'
-import { useState } from 'react'
 
 export default function HeaderClient() {
   const { totalItems } = useCart()
-  const [menuOpen, setMenuOpen] = useState(false)
 
   return (
-    <>
-      {/* Top announcement bar */}
-      <div className="top-bar">
-        <div className="top-bar-inner">
-          <span>Official IRFU Rugby Tickets</span>
-          <span className="top-bar-sep">|</span>
-          <span>Secure Checkout</span>
-          <span className="top-bar-sep">|</span>
-          <span>Six Nations 2027</span>
-        </div>
+    <header className="site-header">
+      <div className="site-header__left">
+        <button className="site-header__menu" aria-label="Menu">
+          <svg width="22" height="16" viewBox="0 0 22 16" fill="none">
+            <rect width="22" height="2" rx="1" fill="white" />
+            <rect y="7" width="22" height="2" rx="1" fill="white" />
+            <rect y="14" width="22" height="2" rx="1" fill="white" />
+          </svg>
+        </button>
+        <Link href="/" className="site-header__logo">
+          <img src="/images/irfu-logo.png" alt="" className="site-header__shamrock" />
+          <span className="site-header__brand">IRFU</span>
+        </Link>
       </div>
-
-      {/* Irish tricolour border */}
-      <div className="irish-border" />
-
-      {/* Main Header */}
-      <header className="header">
-        <div className="header-inner">
-          <Link href="/" className="header-logo">
-            {/* IRFU Logo */}
-            <div className="irfu-logo-container">
-              <svg viewBox="0 0 50 50" className="irfu-shamrock-icon" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <ellipse cx="25" cy="14" rx="8" ry="10" fill="currentColor" />
-                <ellipse cx="14" cy="25" rx="10" ry="8" fill="currentColor" />
-                <ellipse cx="36" cy="25" rx="10" ry="8" fill="currentColor" />
-                <rect x="23" y="28" width="4" height="16" rx="2" fill="currentColor" />
-              </svg>
-              <div className="irfu-logo-text">
-                <span className="irfu-brand">IRFU</span>
-                <span className="irfu-sub">RUGBY</span>
-              </div>
-            </div>
-          </Link>
-
-          <button
-            className="header-menu-toggle"
-            onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="Toggle menu"
-          >
-            <span className={`hamburger ${menuOpen ? 'open' : ''}`}>
-              <span></span>
-              <span></span>
-              <span></span>
-            </span>
-          </button>
-
-          <nav className={`header-nav ${menuOpen ? 'open' : ''}`}>
-            <Link href="/" onClick={() => setMenuOpen(false)}>Home</Link>
-            <Link href="/event/ireland-vs-england-six-nations" onClick={() => setMenuOpen(false)}>Tickets</Link>
-            <Link href="/cart" onClick={() => setMenuOpen(false)}>My Cart</Link>
-            <Link href="/cart" className="header-cart" onClick={() => setMenuOpen(false)}>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="cart-icon">
-                <circle cx="9" cy="21" r="1" />
-                <circle cx="20" cy="21" r="1" />
-                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
-              </svg>
-              {totalItems > 0 && <span className="cart-badge">{totalItems}</span>}
-            </Link>
-          </nav>
-        </div>
-      </header>
-    </>
+      <div className="site-header__right">
+        <Link href="/cart" className="site-header__icon-btn" aria-label="Cart">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+            <line x1="3" y1="6" x2="21" y2="6" />
+            <path d="M16 10a4 4 0 0 1-8 0" />
+          </svg>
+          {totalItems > 0 && <span className="site-header__badge">{totalItems}</span>}
+        </Link>
+        <button className="site-header__icon-btn" aria-label="Search">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <circle cx="11" cy="11" r="8" />
+            <line x1="21" y1="21" x2="16.65" y2="16.65" />
+          </svg>
+        </button>
+      </div>
+    </header>
   )
 }
